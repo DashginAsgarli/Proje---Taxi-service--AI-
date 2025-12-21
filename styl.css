@@ -1,0 +1,389 @@
+  /* Sizin CSS-lər və Əlavələr */
+  * {
+      font-family: 'Inter', sans-serif;
+  }
+
+  #map {
+      height: 75vh;
+      transition: all 0.3s ease;
+      z-index: 1;
+  }
+
+  .header {
+      height: 80px;
+      background-color: #1A4162 !important;
+  }
+
+  .img img {
+      width: 140px;
+  }
+
+  .green {
+      background-color: white !important;
+  }
+
+  .green span {
+      color: #1A4162 !important;
+  }
+
+  .sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: white;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
+      transition: max-height 0.4s ease-in-out;
+      z-index: 1000;
+      max-height: 160px;
+      overflow: hidden;
+  }
+
+  .sheet.is-open {
+      max-height: 85vh;
+      overflow-y: auto;
+  }
+
+  .handle {
+      width: 40px;
+      height: 5px;
+      background: #e5e7eb;
+      border-radius: 10px;
+      margin: 12px auto;
+      cursor: pointer;
+  }
+
+  /* Qaranlıq Mod Rejimi */
+  .dark-mode {
+      background-color: #121212;
+      color: #ffffff;
+  }
+
+  .dark-mode .sheet {
+      background-color: #1e1e1e;
+      color: white;
+  }
+
+  .dark-mode .bg-white {
+      background-color: #1e1e1e !important;
+  }
+
+  .dark-mode input {
+      background-color: #2d2d2d !important;
+      color: white !important;
+  }
+
+  .ride-option.selected {
+      border-color: #10b981;
+      background-color: #f0fdf4;
+  }
+
+  .dark-mode .ride-option.selected {
+      background-color: #064e3b;
+  }
+
+  #notificationContainer {
+      position: fixed;
+      top: 90px;
+      right: 20px;
+      z-index: 9999;
+  }
+
+  .fade-in {
+      animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(10px);
+      }
+
+      to {
+          opacity: 1;
+      }
+  }
+
+  .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      cursor: pointer;
+      transition: background 0.2s;
+  }
+
+  .menu-item i {
+      width: 30px;
+      font-size: 1.2rem;
+      color: #4b5563;
+  }
+
+  .menu-item span {
+      font-weight: 500;
+      color: #1f2937;
+  }
+
+  .badge-new {
+      background-color: #ef4444;
+      color: white;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-left: auto;
+  }
+
+  .promo-container {
+      display: flex;
+      background-color: #f3f4f6;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+  }
+
+  .promo-input {
+      flex: 1;
+      padding: 12px;
+      background: transparent;
+      outline: none;
+      font-size: 14px;
+  }
+
+  .promo-btn {
+      padding: 0 16px;
+      font-weight: 600;
+      color: #1f2937;
+      border-left: 1px solid #e5e7eb;
+  }
+
+  /* Son seferler (Recent trips) */
+  .recent-trips-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #4b5563;
+      margin-bottom: 12px;
+  }
+
+  .trip-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background-color: #f9fafb;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+  }
+
+  .trip-info h4 {
+      font-weight: 600;
+      font-size: 15px;
+  }
+
+  .trip-info p {
+      font-size: 12px;
+      color: #9ca3af;
+  }
+
+  .trip-price {
+      font-weight: 700;
+      color: #059669;
+  }
+
+  .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+  }
+
+  .service-card {
+      background: #f3f4f6;
+      border-radius: 16px;
+      padding: 12px;
+      text-align: left;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s;
+  }
+
+  .service-card:active {
+      transform: scale(0.95);
+  }
+
+  .service-card img {
+      width: 100%;
+      height: 50px;
+      object-fit: contain;
+      margin-bottom: 8px;
+  }
+
+  .service-card h4 {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.2;
+  }
+
+  .service-card p {
+      font-size: 10px;
+      color: #6b7280;
+      margin-top: 2px;
+  }
+
+  .promo-badge {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background: #4c6ef5;
+      color: white;
+      font-size: 8px;
+      padding: 2px 4px;
+      border-radius: 4px;
+  }
+
+  /* Alt Naviqasiya Barı */
+  .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      border-top: 1px solid #e5e7eb;
+      z-index: 2000;
+  }
+
+  .nav-item {
+      text-align: center;
+      color: #9ca3af;
+      cursor: pointer;
+  }
+
+  .nav-item.active {
+      color: #111827;
+  }
+
+  .nav-item i {
+      font-size: 20px;
+      display: block;
+  }
+
+  .nav-item span {
+      font-size: 11px;
+      font-weight: 600;
+  }
+
+  .recent-trips {
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 5px;
+  }
+
+  /* Scrollbar-ı daha estetik edək */
+  .recent-trips::-webkit-scrollbar {
+      width: 4px;
+  }
+
+  .recent-trips::-webkit-scrollbar-thumb {
+      background: #e5e7eb;
+      border-radius: 10px;
+  }
+
+
+  /* Splash ekranının yox olması */
+  .splash-exit {
+      animation: slideUpExit 1s forwards ease-in-out;
+  }
+
+  @keyframes slideUpExit {
+      0% {
+          transform: translateY(0);
+      }
+
+      100% {
+          transform: translateY(-100%);
+          visibility: hidden;
+      }
+  }
+
+  /* Loqonun daxil olma animasiyası */
+  .logo-appear {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+  }
+
+  /* Əsas saytın elementlərinin gecikmə ilə gəlməsi */
+  .main-content-fade {
+      animation: fadeIn 1s both;
+      animation-delay: 6s;
+  }
+
+  :root {
+      --primary-blue: #2563eb;
+      --light-blue: #eff6ff;
+  }
+
+  .ride-option.selected {
+      border-color: var(--primary-blue) !important;
+      background-color: var(--light-blue) !important;
+  }
+
+  .dark-mode .ride-option.selected {
+      background-color: #1e3a8a !important;
+  }
+
+  .trip-price {
+      color: var(--primary-blue) !important;
+  }
+
+  .leaflet-routing-alt {
+      display: none;
+  }
+
+  .header {
+      background-color: #0f172a !important;
+  }
+
+  :root {
+      --primary-blue: #2563eb;
+      --light-blue: #eff6ff;
+  }
+
+  .ride-option.selected {
+      border-color: var(--primary-blue) !important;
+      background-color: var(--light-blue) !important;
+  }
+
+  .dark-mode .ride-option.selected {
+      background-color: #1e3a8a !important;
+  }
+
+  .trip-price {
+      color: var(--primary-blue) !important;
+  }
+
+  .leaflet-routing-alt {
+      display: none;
+  }
+
+  .header {
+      background-color: #1A4162 !important;
+  }
+
+  .bg-green-600 {
+      background-color: #1A4162 !important;
+  }
+
+  #driverPrefs button,
+  #finalConfirmBtn {
+      background-color: #1A4162 !important;
+  }
+
+  .ride-option.selected {
+      border-color: #1A4162 !important;
+      background-color: #f0f7ff;
+  }

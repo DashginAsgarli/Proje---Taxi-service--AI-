@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolt Web Clone - Tam Versiya</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styl.css">
+
+
+</head>
+
+<body class="bg-gray-100 transition-colors duration-300">
+
+    <div id="sideMenu" class="fixed inset-0 z-[2000] invisible">
+        <div id="menuOverlay" class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300"></div>
+        <div id="menuContent"
+            class="absolute left-0 top-0 w-80 h-full bg-white transform -translate-x-full transition-transform duration-300 p-6 overflow-y-auto">
+            <div class="flex items-center space-x-4 mb-6 pt-4">
+                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-3xl text-gray-400">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div>
+                    <h2 class="font-bold text-2xl text-gray-800">Dashqin</h2>
+                    <p class="text-green-600 font-semibold text-sm">Hesabım</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2 mb-8">
+                <span class="text-green-600 text-xl">★</span>
+                <span class="font-bold text-gray-800">5,00 Değerlendirme</span>
+            </div>
+
+            <nav class="space-y-1 border-t pt-4">
+                <div class="menu-item"><i class="fas fa-wallet"></i> <span>Ödeme</span></div>
+
+                <div class="menu-item">
+                    <i class="fas fa-tag"></i>
+                    <div class="flex-1">
+                        <p>Promosyonlar</p>
+                        <p class="text-xs text-gray-400">Promosyon kodunu girin</p>
+                    </div>
+                    <span class="badge-new">YENİ</span>
+                </div>
+
+                <div class="menu-item"><i class="fas fa-star"></i> <span>Abonelikler</span></div>
+                <div class="menu-item"><i class="fas fa-history"></i> <span>Yolculuklarım</span></div>
+                <div class="menu-item"><i class="fas fa-shield-alt"></i> <span>Güvenlik</span></div>
+                <div class="menu-item"><i class="fas fa-file-invoice-dollar"></i> <span>Sürüşlerinizin Giderleri</span>
+                </div>
+                <div class="menu-item"><i class="fas fa-question-circle"></i> <span>Destek</span></div>
+                <div class="menu-item"><i class="fas fa-info-circle"></i> <span>Hakkında</span></div>
+            </nav>
+
+            <div class="mt-8 pt-6 border-t space-y-4">
+                <div class="flex items-center space-x-4 text-gray-700 font-medium cursor-pointer">
+                    <i class="fas fa-utensils w-6"></i> <span>Bolt Gıda</span>
+                </div>
+                <div class="flex items-center space-x-4 text-gray-700 font-medium cursor-pointer">
+                    <i class="fas fa-shopping-basket w-6"></i> <span>Bolt Pazarı</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header shadow-sm p-4 flex justify-between items-center relative z-50">
+        <div class="flex items-center space-x-2">
+            <button id="menuBtn" class="flex items-center space-x-3">
+                <div class="green w-10 h-10 rounded-full flex items-center justify-center">
+                    <span class="font-bold text-xl">D</span>
+                </div>
+                <div class="img"><img src="./img/logo.png" alt="logo" style="filter: brightness(0) invert(1);"></div>
+            </button>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="darkModeToggle" class="p-2 rounded-full bg-white/20 text-white">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="sheet" class="sheet p-5">
+        <div class="handle" id="sheetHandle"></div>
+        <div id="homeView" class="fade-in">
+            <div class="bg-indigo-50 p-4 rounded-2xl flex items-center justify-between mb-6 border border-indigo-100">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm">5 sürüşdə %20 indirim</h4>
+                        <p class="text-xs text-indigo-600">Detayları görüntüle</p>
+                    </div>
+                </div>
+                <i class="fas fa-times text-gray-400 text-sm"></i>
+            </div>
+
+            <h2 class="text-2xl font-bold mb-4">Yolculuğunuz buradan başlıyor.</h2>
+
+            <div class="service-grid">
+                <div class="service-card" onclick="showSearch()">
+                    <span class="promo-badge"><i class="fas fa-tag"></i></span>
+                    <img src="https://cdn-icons-png.flaticon.com/512/3202/3202926.png" alt="car">
+                    <h4>Yolculuklar</h4>
+                    <p>Yola koyulalım</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2962/2962303.png" alt="scooter">
+                    <h4>Scooterlar</h4>
+                    <p>Kirala ve git</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt="plan">
+                    <h4>Planla</h4>
+                    <p>Önceden rezerv...</p>
+                </div>
+                <div class="service-card">
+                    <span class="promo-badge"><i class="fas fa-tag"></i></span>
+                    <img src="https://cdn-icons-png.flaticon.com/512/2555/2555013.png" alt="driver">
+                    <h4>Yalnızca Şoför</h4>
+                    <p>Kendi arabanızı...</p>
+                </div>
+                <div class="service-card">
+                    <span class="promo-badge"><i class="fas fa-tag"></i></span>
+                    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="food">
+                    <h4>Bolt Gıda</h4>
+                    <p>Hızlı teslimat</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/679/679821.png" alt="send">
+                    <h4>Bolt Send</h4>
+                    <p>Paket teslimatı</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="search" class="fade-in">
+            <div class="flex space-x-3 mb-3">
+                <div class="w-1.5 h-10 bg-green-600 rounded-full my-auto"></div>
+                <input id="pickup" type="text" placeholder="Haradasınız?"
+                    class="flex-1 p-3 rounded-xl bg-gray-100 outline-none">
+            </div>
+            <div class="flex space-x-3 mb-4">
+                <div class="w-1.5 h-10 bg-red-600 rounded-full my-auto"></div>
+                <input id="dest" type="text" placeholder="Haraya?"
+                    class="flex-1 p-3 rounded-xl bg-gray-100 outline-none">
+            </div>
+
+            <div class="promo-container">
+                <input type="text" placeholder="Promo kod" class="promo-input">
+                <button class="promo-btn">Tətbiq et</button>
+            </div>
+
+            <button id="showRidesBtn" onclick="showRides()"
+                class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-bold mb-6 transition-all">
+                Davam et
+            </button>
+
+            <div class="recent-trips">
+                <h3 class="recent-trips-title">Son səfərlər</h3>
+
+                <div class="trip-item" onclick="selectRecentTrip('28 May Park', 'Həzi Aslanov m/st')">
+                    <div class="trip-info">
+                        <h4>28 May Park</h4>
+                        <p>Həzi Aslanov m/st</p>
+                    </div>
+                    <div class="trip-price">₼4.20</div>
+                </div>
+
+                <div class="trip-item" onclick="selectRecentTrip('Gənclik Mall', 'Nərimanov')">
+                    <div class="trip-info">
+                        <h4>Gənclik Mall</h4>
+                        <p>Nərimanov r.</p>
+                    </div>
+                    <div class="trip-price">₼3.50</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="rides" class="hidden fade-in">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="font-bold text-xl">Sürüş seçin</h2>
+                <button onclick="goBackToSearch()" class="text-gray-500">Geri</button>
+            </div>
+            <div id="rideOptions" class="space-y-3 mb-4">
+            </div>
+            <button id="bookRideBtn" onclick="bookRide()"
+                class="w-full bg-gray-300 text-gray-500 py-3 rounded-xl font-bold" disabled>Sürüş seçin</button>
+        </div>
+
+        <div id="driverPrefs" class="hidden fade-in">
+            <h2 class="font-bold text-xl mb-4">Sürücü Seçimləri</h2>
+            <div class="space-y-4 mb-6">
+                <div onclick="setDriverOption('multi')" id="optMulti"
+                    class="p-4 border-2 border-green-500 bg-green-50 rounded-xl cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold">Sifarişləri qəbul etsin</h4>
+                            <p class="text-xs">Yolüstü digər işləri götürə bilər.</p>
+                        </div>
+                        <i class="fas fa-check-circle text-green-600"></i>
+                    </div>
+                </div>
+                <div onclick="setDriverOption('single')" id="optSingle"
+                    class="p-4 border-2 border-gray-200 rounded-xl cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold">Sadece mənimlə ilgilənsin</h4>
+                            <p class="text-xs">Sürücü başqa sifariş qəbul etməz.</p>
+                        </div>
+                        <i class="far fa-circle text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <button onclick="finalStepConfirm()"
+                class="w-full bg-green-600 text-white py-3 rounded-xl font-bold">Sifarişi Təsdiqlə</button>
+        </div>
+
+        <div id="booking" class="hidden text-center py-10 fade-in">
+            <div class="flex justify-center mb-4">
+                <div class="animate-ping h-12 w-12 rounded-full bg-green-500 absolute"></div>
+                <i class="fas fa-car-side text-4xl text-green-600 relative"></i>
+            </div>
+            <h2 class="font-bold text-xl">Sürücü axtarılır...</h2>
+            <p class="text-gray-500">Təxminən 2 dəqiqəyə tapılacaq</p>
+            <button onclick="location.reload()" class="mt-6 text-red-500 font-semibold">Ləğv et</button>
+        </div>
+        <div id="driverFound" class="hidden fade-in text-left">
+            <div class="driver-card">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="driver-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Deniz Qudret</h4>
+                            <p class="text-xs text-gray-500">Frontend Developer</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-green-600 font-bold">5.0 ★</div>
+                        <div class="text-xs text-gray-400">99-DQ-101</div>
+                    </div>
+                </div>
+
+                <div class="flex space-x-2">
+                    <button class="flex-1 bg-gray-100 py-2 rounded-lg font-semibold text-sm">Mesaj yaz</button>
+                    <button class="w-12 bg-gray-100 py-2 rounded-lg"><i class="fas fa-phone"></i></button>
+                </div>
+            </div>
+
+            <div class="mt-4 p-4 bg-green-50 rounded-xl border border-green-100">
+                <p class="text-sm text-green-800 font-medium">
+                    <i class="fas fa-info-circle mr-2"></i>Sürücü 3 dəqiqəyə çatır
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="notificationContainer"></div>
+    <div id="splash-screen" class="fixed inset-0 z-[10000] bg-black flex items-center justify-center overflow-hidden">
+        <div class="flex flex-col items-center">
+            <div id="splash-logo" class="w-64 md:w-80 opacity-0 transform scale-75 transition-all duration-1000">
+                <img src="./img/logo.png" alt="GetGal Logo" class="w-full h-auto">
+            </div>
+
+            <div class="w-48 h-1 bg-gray-800 rounded-full mt-8 overflow-hidden">
+                <div id="progress-bar" class="h-full bg-blue-500 w-0 transition-all duration-[5000ms] ease-linear">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
