@@ -7,7 +7,7 @@ let state = {
 };
 
 const ridePrices = {
-    'Bolt': { base: 1.5, perKm: 0.7, icon: 'fa-car' },
+    'GetGəl': { base: 1.5, perKm: 0.7, icon: 'fa-car' },
     'Priority': { base: 3.0, perKm: 1.1, icon: 'fa-rocket' },
     'XL': { base: 4.0, perKm: 1.5, icon: 'fa-users' },
     'Eco': { base: 1.8, perKm: 0.75, icon: 'fa-leaf' }
@@ -274,3 +274,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
     }, 2000); 
 });
+
+function addStop() {
+    const container = document.getElementById('extraStops');
+    const stopDiv = document.createElement('div');
+    stopDiv.className = "flex space-x-3 mb-4 fade-in items-center";
+    stopDiv.innerHTML = `
+        <div class="w-1.5 h-10 bg-yellow-500 rounded-full my-auto"></div>
+        <input type="text" placeholder="Əlavə dayanacaq" class="flex-1 p-3 rounded-xl bg-gray-100 outline-none">
+        <button onclick="this.parentElement.remove()" class="text-red-500 px-2"><i class="fas fa-times"></i></button>
+    `;
+    container.appendChild(stopDiv);
+}

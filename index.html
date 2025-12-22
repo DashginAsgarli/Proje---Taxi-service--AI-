@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bolt Web Clone - Tam Versiya</title>
+    <title>GetGəl</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -62,10 +62,11 @@
                     <i class="fas fa-utensils w-6"></i> <span>Bolt Gıda</span>
                 </div>
                 <div class="flex items-center space-x-4 text-gray-700 font-medium cursor-pointer">
-                    <i class="fas fa-shopping-basket w-6"></i> <span>Bolt Pazarı</span>
+                    <i class="fas fa-shopping-basket w-6"></i> <span>GetGəl Pazarı</span>
                 </div>
             </div>
         </div>
+        
     </div>
 
     <div class="header shadow-sm p-4 flex justify-between items-center relative z-50">
@@ -111,6 +112,7 @@
                     <h4>Yolculuklar</h4>
                     <p>Yola koyulalım</p>
                 </div>
+
                 <div class="service-card">
                     <img src="https://cdn-icons-png.flaticon.com/512/2962/2962303.png" alt="scooter">
                     <h4>Scooterlar</h4>
@@ -130,12 +132,12 @@
                 <div class="service-card">
                     <span class="promo-badge"><i class="fas fa-tag"></i></span>
                     <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="food">
-                    <h4>Bolt Gıda</h4>
+                    <h4>GetGəl Gıda</h4>
                     <p>Hızlı teslimat</p>
                 </div>
                 <div class="service-card">
                     <img src="https://cdn-icons-png.flaticon.com/512/679/679821.png" alt="send">
-                    <h4>Bolt Send</h4>
+                    <h4>GetGəl Send</h4>
                     <p>Paket teslimatı</p>
                 </div>
             </div>
@@ -148,11 +150,16 @@
                 <input id="pickup" type="text" placeholder="Haradasınız?"
                     class="flex-1 p-3 rounded-xl bg-gray-100 outline-none">
             </div>
-            <div class="flex space-x-3 mb-4">
+            <div class="flex space-x-3 mb-4 items-center">
                 <div class="w-1.5 h-10 bg-red-600 rounded-full my-auto"></div>
                 <input id="dest" type="text" placeholder="Haraya?"
                     class="flex-1 p-3 rounded-xl bg-gray-100 outline-none">
+                <button onclick="addStop()"
+                    class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-300">
+                    <i class="fas fa-plus"></i>
+                </button>
             </div>
+            <div id="extraStops"></div>
 
             <div class="promo-container">
                 <input type="text" placeholder="Promo kod" class="promo-input">
@@ -196,6 +203,7 @@
                 class="w-full bg-gray-300 text-gray-500 py-3 rounded-xl font-bold" disabled>Sürüş seçin</button>
         </div>
 
+
         <div id="driverPrefs" class="hidden fade-in">
             <h2 class="font-bold text-xl mb-4">Sürücü Seçimləri</h2>
             <div class="space-y-4 mb-6">
@@ -223,7 +231,14 @@
             <button onclick="finalStepConfirm()"
                 class="w-full bg-green-600 text-white py-3 rounded-xl font-bold">Sifarişi Təsdiqlə</button>
         </div>
-
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl mb-4 border border-gray-100 cursor-pointer hover:bg-gray-100"
+            onclick="togglePayment()">
+            <div class="flex items-center space-x-3">
+                <i id="payIcon" class="fas fa-money-bill-wave text-green-600"></i>
+                <span id="payMethodText" class="font-medium text-sm">Nağd ödəniş</span>
+            </div>
+            <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+        </div>
         <div id="booking" class="hidden text-center py-10 fade-in">
             <div class="flex justify-center mb-4">
                 <div class="animate-ping h-12 w-12 rounded-full bg-green-500 absolute"></div>
@@ -233,6 +248,7 @@
             <p class="text-gray-500">Təxminən 2 dəqiqəyə tapılacaq</p>
             <button onclick="location.reload()" class="mt-6 text-red-500 font-semibold">Ləğv et</button>
         </div>
+
         <div id="driverFound" class="hidden fade-in text-left">
             <div class="driver-card">
                 <div class="flex items-center justify-between mb-4">
@@ -262,6 +278,7 @@
                     <i class="fas fa-info-circle mr-2"></i>Sürücü 3 dəqiqəyə çatır
                 </p>
             </div>
+            
         </div>
     </div>
 
